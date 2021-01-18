@@ -5,6 +5,9 @@ import {
   GitHubSourceCodeProvider,
   RedirectStatus,
 } from "@aws-cdk/aws-amplify";
+
+import * as cloudfront from "@aws-cdk/aws-cloudfront";
+import * as origins from "@aws-cdk/aws-cloudfront-origins";
 export class TestAppStack extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
@@ -18,6 +21,10 @@ export class TestAppStack extends cdk.Stack {
       }),
     });
     amplifyApp.addBranch("master");
+
+    new cloudfront.Distribution(this, "myDist", {
+      defaultBehavior: { origin: new origins.HttpOrigin(`master.${amplifyApp.appId}.amplifyapp.com`)},
+    });
   }
 
 }
