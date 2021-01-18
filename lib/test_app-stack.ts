@@ -10,7 +10,7 @@ export class TestAppStack extends cdk.Stack {
     super(scope, id, props);
     const amplifyApp = new App(this, "MyApp", {
       sourceCodeProvider: new GitHubSourceCodeProvider({
-        owner: "Zdrenka",
+        owner: "zdrenka",
         repository: "test_app",
         oauthToken: cdk.SecretValue.secretsManager(
           "arn:aws:secretsmanager:eu-west-1:395026163603:secret:karls-secret-DONT-steal-8RYFW5"
